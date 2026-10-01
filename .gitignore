@@ -1,0 +1,6 @@
+# Word documents (work_to_do.docx etc.) and Word lock files
+*.docx
+~$*
+
+# macOS
+.DS_Store
