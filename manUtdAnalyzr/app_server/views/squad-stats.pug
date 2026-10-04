@@ -1,0 +1,49 @@
+extends layout
+include _includes/mixins
+
+block content
+  .row.banner.mb-4
+    .col-12
+      h1.h2.mb-1= pageHeader.title
+      p.text-body-secondary.mb-0= pageHeader.strapline
+
+  .card.squad-card.text-center
+    .card-header
+      ul.nav.nav-tabs.card-header-tabs(role='tablist')
+        each tab, i in tabs
+          li.nav-item(role='presentation')
+            button.nav-link(
+              class=(i === 0 ? 'active' : ''),
+              id=tab.id + '-tab',
+              type='button',
+              role='tab',
+              data-bs-toggle='tab',
+              data-bs-target='#' + tab.id,
+              aria-controls=tab.id,
+              aria-selected=(i === 0 ? 'true' : 'false')
+            )= tab.label
+
+    .card-body
+      h5.card-title= squadCard.title
+      p.card-text.text-body-secondary.mb-4= squadCard.text
+
+      .tab-content
+        each tab, i in tabs
+          - const tabPlayers = tab.position ? players.filter(p => p.position === tab.position) : players
+          .tab-pane.fade(
+            class=(i === 0 ? 'show active' : ''),
+            id=tab.id,
+            role='tabpanel',
+            aria-labelledby=tab.id + '-tab',
+            tabindex='0'
+          )
+            +squadTable(tabPlayers, columns)
+
+  section.staff-section.mt-5(aria-labelledby='staff-heading')
+    .mb-3
+      h2#staff-heading.h3.mb-1= staffSection.title
+      p.text-body-secondary.mb-0= staffSection.strapline
+    .row.g-4
+      each member in staff
+        .col-12.col-sm-6.col-lg-4
+          +staffCard(member)

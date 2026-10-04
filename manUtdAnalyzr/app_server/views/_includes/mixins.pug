@@ -1,0 +1,62 @@
+//- Form field
+mixin formField(field)
+  .mb-3.text-start
+    label.form-label(for=field.name)= field.label
+    if field.type === 'select'
+      select.form-select(id=field.name, name=field.name)
+        option(value='', selected, disabled)= field.placeholder
+        each option in field.options
+          option(value=option)= option
+    else
+      input.form-control(id=field.name, name=field.name, type=field.type, placeholder=field.placeholder)
+
+//- Page image
+mixin authHero(image)
+  .auth-hero-wrap.rounded-4
+    img.auth-hero(src=image.src, alt=image.alt)
+
+//- Squad table
+mixin squadTable(players, columns)
+  .table-responsive
+    table.table.table-hover.align-middle.mb-0.squad-table
+      thead
+        tr
+          each column in columns
+            th(scope='col', class=column.align === 'start' ? 'text-start' : '')
+              if column.icon
+                span.card-icon(class='card-' + column.icon, title=column.label, aria-hidden='true')
+                span.visually-hidden= column.label
+              else
+                = column.label
+      tbody
+        each player in players
+          tr
+            th(scope='row')= player.number
+            td.text-start
+              .d-flex.align-items-center.gap-2
+                img.player-photo.rounded-circle(src=player.photo, alt='', width='40', height='40', loading='lazy')
+                div
+                  .fw-semibold.text-nowrap= player.name
+                  small.text-body-secondary= player.position
+            td= player.age
+            td
+              img.player-flag(src=player.flag.src, alt=player.flag.name, title=player.flag.name, width='30', height='21', loading='lazy')
+            td= player.stats.assists
+            td= player.stats.goals
+            td= player.stats.yellowCards
+            td= player.stats.redCards
+            td= player.stats.minutesPlayed
+        else
+          tr
+            td(colspan=columns.length) No players in this position yet.
+
+//- Staff card
+mixin staffCard(member)
+  .card.staff-card.h-100
+    img.card-img-top.staff-photo(src=member.photo, alt=member.name, loading='lazy')
+    .card-body
+      h5.card-title.mb-1= member.name
+      p.card-text.text-body-secondary.mb-3= member.role
+      .d-flex.align-items-center.gap-2
+        img.player-flag(src=member.flag.src, alt='', width='30', height='21', loading='lazy')
+        small= member.flag.name

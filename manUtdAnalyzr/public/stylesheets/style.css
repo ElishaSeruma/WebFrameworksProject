@@ -1,8 +1,163 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+/* Theme colours */
+:root,
+[data-bs-theme="dark"] {
+  --app-bg: #212121;
+  --app-surface: #2b2b2b;
+  --app-accent: #da291c; /* United red */
+  --bs-body-bg: var(--app-bg);
+  --bs-body-color: #f1f1f1;
+  --bs-link-color: #ff5a4e;
+  --bs-link-color-rgb: 255, 90, 78;
+  --bs-link-hover-color: #ff8a80;
+  --bs-link-hover-color-rgb: 255, 138, 128;
 }
 
-a {
-  color: #00B7FF;
+body {
+  background-color: var(--app-bg);
+  min-height: 100vh;
+}
+
+/* Navbar (based on a Bootsnipp snippet by maridlcrmn) */
+
+.navbar.navbar-inverse { background-color: #181818; border-bottom: 1px solid #333; }
+.navbar.navbar-default { background-color: #f8f8f8; }
+
+.navbar-brand { position: relative; z-index: 2; font-weight: 700; }
+
+.navbar-nav.navbar-right .btn { position: relative; z-index: 2; padding: 4px 20px; margin: 4px auto; transition: transform 0.3s; }
+
+.navbar .navbar-collapse { position: relative; overflow: hidden !important; }
+
+.navbar .nav-collapse {
+  position: absolute; z-index: 1;
+  top: 0; left: 0; right: 0; bottom: 0;
+  margin: 0; padding-right: 140px; padding-left: 80px; width: 100%;
+}
+.navbar.navbar-default .nav-collapse { background-color: #f8f8f8; }
+.navbar.navbar-inverse .nav-collapse { background-color: #181818; }
+.navbar .nav-collapse .navbar-form { height: 100%; border-width: 0; box-shadow: none; }
+.navbar .nav-collapse .navbar-form .form-control { max-width: 260px; }
+.nav-collapse > li { float: right; }
+
+.btn.btn-circle { border-radius: 50px; }
+.btn.btn-outline { background-color: transparent; }
+
+/* Open button */
+.navbar-nav.navbar-right .btn:not(.collapsed) {
+  background-color: var(--app-accent);
+  border-color: var(--app-accent);
+  color: #fff;
+}
+
+.navbar.navbar-default .nav-collapse,
+.navbar.navbar-inverse .nav-collapse {
+  height: auto !important;
+  transition: transform 0.3s;
+  transform: translate(0px, -50px);
+}
+.navbar.navbar-default .nav-collapse.show,
+.navbar.navbar-inverse .nav-collapse.show {
+  transform: translate(0px, 0px);
+}
+
+/* Phone */
+@media screen and (max-width: 767.98px) {
+
+  .navbar .nav-collapse { position: static; margin: 7.5px auto; padding: 0; }
+  .navbar .nav-collapse .navbar-form { margin: 0; justify-content: stretch !important; }
+  .navbar .nav-collapse .navbar-form .form-control { max-width: none; }
+  .nav-collapse > li { float: none; }
+
+  .navbar.navbar-default .nav-collapse,
+  .navbar.navbar-inverse .nav-collapse { transform: translate(-100%, 0px); }
+  .navbar.navbar-default .nav-collapse.show,
+  .navbar.navbar-inverse .nav-collapse.show { transform: translate(0px, 0px); }
+
+  .navbar.navbar-default .nav-collapse.slide-down,
+  .navbar.navbar-inverse .nav-collapse.slide-down { transform: translate(0px, -100%); }
+  .navbar.navbar-default .nav-collapse.show.slide-down,
+  .navbar.navbar-inverse .nav-collapse.show.slide-down { transform: translate(0px, 0px); }
+}
+
+/* Brand */
+.brand-logo { width: 36px; height: 36px; object-fit: contain; }
+
+.btn-united {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: var(--app-accent);
+  --bs-btn-border-color: var(--app-accent);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #b81f14;
+  --bs-btn-hover-border-color: #b81f14;
+  --bs-btn-active-bg: #a01b12;
+  --bs-btn-active-border-color: #a01b12;
+  font-weight: 600;
+  border-radius: 50px;
+}
+
+/* Register and login */
+.auth-hero-wrap { height: min(78vh, 640px); min-height: 480px; overflow: hidden; }
+.auth-hero { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+
+.auth-card { --bs-card-bg: var(--app-surface); border-color: #353535; }
+.auth-card .form-control,
+.auth-card .form-select { background-color: #1c1c1c; border-color: #3d3d3d; }
+.auth-card .form-control:focus,
+.auth-card .form-select:focus { border-color: var(--app-accent); box-shadow: 0 0 0 0.2rem rgba(218, 41, 28, 0.25); }
+
+.username-pill {
+  background: transparent;
+  border: 1px solid var(--app-accent);
+  color: #ff8a80;
+  font-weight: 500;
+  padding: 0.4em 0.9em;
+}
+
+/* Squad card and table */
+.squad-card {
+  --bs-card-bg: var(--app-surface);
+  --bs-card-cap-bg: #262626;
+  --bs-card-border-radius: 1rem;
+  --bs-card-inner-border-radius: calc(1rem - 1px);
+  border-color: #353535;
+  overflow: hidden;
+}
+
+.squad-card .nav-tabs .nav-link { color: #bdbdbd; }
+.squad-card .nav-tabs .nav-link:hover { color: #fff; }
+.squad-card .nav-tabs .nav-link.active {
+  color: #fff;
+  background-color: var(--app-surface);
+  border-color: #353535 #353535 var(--app-surface);
+  box-shadow: inset 0 3px 0 var(--app-accent);
+}
+
+.squad-table { --bs-table-bg: transparent; --bs-table-hover-bg: rgba(218, 41, 28, 0.12); }
+.squad-table thead th { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.03em; color: #a8a8a8; white-space: nowrap; }
+.squad-table td, .squad-table th { white-space: nowrap; }
+
+.player-photo { object-fit: cover; object-position: center top; background: #3a3a3a; flex-shrink: 0; }
+.player-flag { width: 30px; height: 21px; object-fit: contain; }
+
+.card-icon { display: inline-block; width: 12px; height: 16px; border-radius: 2px; vertical-align: middle; }
+.card-icon.card-yellow { background-color: #f5c518; }
+.card-icon.card-red { background-color: var(--app-accent); }
+
+/* Coaching staff */
+.staff-card {
+  --bs-card-bg: var(--app-surface);
+  --bs-card-border-radius: 1rem;
+  --bs-card-inner-border-radius: calc(1rem - 1px);
+  border-color: #353535;
+  overflow: hidden;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.staff-card:hover { transform: translateY(-4px); border-color: var(--app-accent); }
+.staff-photo { height: 240px; object-fit: cover; object-position: center 20%; background: #3a3a3a; }
+
+/* Phone */
+@media screen and (max-width: 767.98px) {
+  .auth-hero-wrap { min-height: 0; height: 260px; }
+  .squad-card .nav-tabs { flex-wrap: nowrap; overflow-x: auto; overflow-y: hidden; }
+  .squad-card .nav-tabs .nav-link { white-space: nowrap; }
 }
