@@ -14,4 +14,5 @@ catch (e) {
 console.log("could not connect");
 }
 
-//require('./locations');
+require('./staff'); 
+require('./players');

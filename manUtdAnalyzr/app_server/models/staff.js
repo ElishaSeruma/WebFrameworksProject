@@ -1,16 +1,23 @@
 const mongoose = require('mongoose');
-const openingTimeSchema = new mongoose.Schema({
-days: {
-type: String,
-required: true
-},
-opening: String,
-closing: String,
-closed: {
-type: Boolean,
-required: true
-}
+const staffSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+        },
+    role: {
+        type: String,
+        required
+    },
+    flag: String,
+    photo: String
 });
+
+const playerSchema = new mongoose.Schema({
+    name: Int32
+
+})
+
+
 const reviewSchema = new mongoose.Schema({
 author: String,
 rating: {
