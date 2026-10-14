@@ -1,4 +1,5 @@
 // Country flags (Northern Ireland is a local file)
+//start of mongoWork
 const FLAG_CDN = 'https://flagdownload.com/wp-content/uploads/';
 const flags = {
   england:         { name: 'England',          src: FLAG_CDN + 'Flag_of_England_Flat_Wavy-1024x707.png' },
