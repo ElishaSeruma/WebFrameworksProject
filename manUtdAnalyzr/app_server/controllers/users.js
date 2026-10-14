@@ -34,7 +34,7 @@ const register = function (req, res) {
 // Login page
 const login = function (req, res) {
   res.render('login', {
-    title: 'Login | Stats Analyzr',
+    title: 'Login Stats Analyzr',
     pageHeader: {
       kicker: 'Login to your account',
       title: 'Welcome to Manchester United 26/27 Stats Analyzr'

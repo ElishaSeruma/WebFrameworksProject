@@ -4,7 +4,7 @@ const staff = require('../data/staff');
 // Stats page
 const squadStats = function (req, res) {
   res.render('squad-stats', {
-    title: 'View Stats | Stats Analyzr',
+    title: 'View Stats Stats Analyzr',
     pageHeader: {
       title: 'Manchester United Full Squad',
       strapline: '2026/27 Premier League season'
