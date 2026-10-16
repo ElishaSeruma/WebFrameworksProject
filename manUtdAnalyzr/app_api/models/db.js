@@ -16,3 +16,4 @@ console.log("could not connect");
 
 require('./staff'); 
 require('./players');
+require('./users');
