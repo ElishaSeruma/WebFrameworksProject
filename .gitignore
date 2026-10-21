@@ -4,3 +4,9 @@
 
 # macOS
 .DS_Store
+
+.env
+
+
+# local copy of db.js with the hardcoded password
+/db.js
