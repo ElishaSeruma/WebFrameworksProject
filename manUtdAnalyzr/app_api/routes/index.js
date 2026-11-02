@@ -3,6 +3,7 @@ const router = express.Router();
 const ctrlUsers = require('../controllers/users');
 const ctrlPlayers = require('../controllers/players');
 
+// users
 router
   .route('/users/register')
   .post(ctrlUsers.usersRegister);
@@ -11,10 +12,17 @@ router
   .route('/users/login')
   .post(ctrlUsers.usersLogin);
 
+// players
 router
   .route('/players')
-  .get(ctrlPlayers.playersList);
+  .get(ctrlPlayers.playersList)
+  .post(ctrlPlayers.playersCreate);
 
+router
+  .route('/players/:playerid')
+  .get(ctrlPlayers.playersReadOne);
+
+// staff
 router
   .route('/staff')
   .get(ctrlPlayers.staffList);

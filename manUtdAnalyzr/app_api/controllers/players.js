@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const Player = mongoose.model('Player');
 const Staff = mongoose.model('Staff');
 
+/* ---------- players ---------- */
+
 const playersList = async function (req, res) {
   try {
     const players = await Player.find();
@@ -15,6 +17,42 @@ const playersList = async function (req, res) {
     res.status(500).json({ error: err.message });
   }
 };
+
+const playersCreate = async function (req, res) {
+  try {
+    const player = await Player.create({
+      number: req.body.number,
+      name: req.body.name,
+      position: req.body.position,
+      age: req.body.age,
+      flag: req.body.flag,
+      photo: req.body.photo,
+      stats: req.body.stats
+    });
+    res.status(201).json(player);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+};
+
+const playersReadOne = async function (req, res) {
+  if (!req.params || !req.params.playerid) {
+    return res.status(404).json({ message: "No playerid in request" });
+  }
+  try {
+    const player = await Player.findById(req.params.playerid);
+
+    if (!player) {
+      return res.status(404).json({ message: "playerid not found" });
+    }
+
+    res.status(200).json(player);
+  } catch (err) {
+    res.status(404).json(err);
+  }
+};
+
+/* ---------- staff ---------- */
 
 const staffList = async function (req, res) {
   try {
@@ -32,5 +70,7 @@ const staffList = async function (req, res) {
 
 module.exports = {
   playersList,
+  playersCreate,
+  playersReadOne,
   staffList
 };
