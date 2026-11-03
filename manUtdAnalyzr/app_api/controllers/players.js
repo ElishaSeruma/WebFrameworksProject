@@ -52,6 +52,32 @@ const playersReadOne = async function (req, res) {
   }
 };
 
+const playersUpdateOne = async function (req, res) {
+  if (!req.params.playerid) {
+    return res.status(404).json({ message: "Not found, playerid is required" });
+  }
+  try {
+    const player = await Player.findById(req.params.playerid);
+
+    if (!player) {
+      return res.status(404).json({ message: "playerid not found" });
+    }
+
+    player.number = req.body.number;
+    player.name = req.body.name;
+    player.position = req.body.position;
+    player.age = req.body.age;
+    player.flag = req.body.flag;
+    player.photo = req.body.photo;
+    player.stats = req.body.stats;
+
+    const updatedPlayer = await player.save();
+    res.status(200).json(updatedPlayer);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+};
+
 /* ---------- staff ---------- */
 
 const staffList = async function (req, res) {
@@ -72,5 +98,6 @@ module.exports = {
   playersList,
   playersCreate,
   playersReadOne,
+  playersUpdateOne,
   staffList
 };

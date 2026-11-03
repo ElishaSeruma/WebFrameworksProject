@@ -20,7 +20,8 @@ router
 
 router
   .route('/players/:playerid')
-  .get(ctrlPlayers.playersReadOne);
+  .get(ctrlPlayers.playersReadOne)
+  .put(ctrlPlayers.playersUpdateOne);
 
 // staff
 router
