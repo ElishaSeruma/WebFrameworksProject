@@ -26,6 +26,11 @@ router
 // staff
 router
   .route('/staff')
-  .get(ctrlPlayers.staffList);
+  .get(ctrlPlayers.staffList)
+  .post(ctrlPlayers.staffCreate);
+
+router
+  .route('/staff/:staffid')
+  .get(ctrlPlayers.staffReadOne);
 
 module.exports = router;

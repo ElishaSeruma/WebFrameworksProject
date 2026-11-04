@@ -94,10 +94,43 @@ const staffList = async function (req, res) {
   }
 };
 
+const staffCreate = async function (req, res) {
+  try {
+    const member = await Staff.create({
+      name: req.body.name,
+      role: req.body.role,
+      flag: req.body.flag,
+      photo: req.body.photo
+    });
+    res.status(201).json(member);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+};
+
+const staffReadOne = async function (req, res) {
+  if (!req.params || !req.params.staffid) {
+    return res.status(404).json({ message: "No staffid in request" });
+  }
+  try {
+    const member = await Staff.findById(req.params.staffid);
+
+    if (!member) {
+      return res.status(404).json({ message: "staffid not found" });
+    }
+
+    res.status(200).json(member);
+  } catch (err) {
+    res.status(404).json(err);
+  }
+};
+
 module.exports = {
   playersList,
   playersCreate,
   playersReadOne,
   playersUpdateOne,
-  staffList
+  staffList,
+  staffCreate,
+  staffReadOne
 };
