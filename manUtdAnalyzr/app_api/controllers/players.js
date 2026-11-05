@@ -125,6 +125,29 @@ const staffReadOne = async function (req, res) {
   }
 };
 
+const staffUpdateOne = async function (req, res) {
+  if (!req.params.staffid) {
+    return res.status(404).json({ message: "Not found, staffid is required" });
+  }
+  try {
+    const member = await Staff.findById(req.params.staffid);
+
+    if (!member) {
+      return res.status(404).json({ message: "staffid not found" });
+    }
+
+    member.name = req.body.name;
+    member.role = req.body.role;
+    member.flag = req.body.flag;
+    member.photo = req.body.photo;
+
+    const updatedMember = await member.save();
+    res.status(200).json(updatedMember);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+};
+
 module.exports = {
   playersList,
   playersCreate,
@@ -132,5 +155,6 @@ module.exports = {
   playersUpdateOne,
   staffList,
   staffCreate,
-  staffReadOne
+  staffReadOne,
+  staffUpdateOne
 };

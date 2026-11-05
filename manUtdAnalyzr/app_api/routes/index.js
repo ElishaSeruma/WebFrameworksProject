@@ -31,6 +31,7 @@ router
 
 router
   .route('/staff/:staffid')
-  .get(ctrlPlayers.staffReadOne);
+  .get(ctrlPlayers.staffReadOne)
+  .put(ctrlPlayers.staffUpdateOne);
 
 module.exports = router;
