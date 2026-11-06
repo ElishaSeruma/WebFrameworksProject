@@ -21,7 +21,8 @@ router
 router
   .route('/players/:playerid')
   .get(ctrlPlayers.playersReadOne)
-  .put(ctrlPlayers.playersUpdateOne);
+  .put(ctrlPlayers.playersUpdateOne)
+  .delete(ctrlPlayers.playersDeleteOne);
 
 // staff
 router
@@ -32,6 +33,7 @@ router
 router
   .route('/staff/:staffid')
   .get(ctrlPlayers.staffReadOne)
-  .put(ctrlPlayers.staffUpdateOne);
+  .put(ctrlPlayers.staffUpdateOne)
+  .delete(ctrlPlayers.staffDeleteOne);
 
 module.exports = router;

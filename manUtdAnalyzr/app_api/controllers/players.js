@@ -78,6 +78,24 @@ const playersUpdateOne = async function (req, res) {
   }
 };
 
+const playersDeleteOne = async function (req, res) {
+  const playerid = req.params.playerid;
+  if (!playerid) {
+    return res.status(404).json({ message: "No playerid" });
+  }
+  try {
+    const player = await Player.findByIdAndDelete(playerid);
+
+    if (!player) {
+      return res.status(404).json({ message: "playerid not found" });
+    }
+
+    res.status(204).json(null);
+  } catch (err) {
+    res.status(404).json(err);
+  }
+};
+
 /* ---------- staff ---------- */
 
 const staffList = async function (req, res) {
@@ -148,13 +166,33 @@ const staffUpdateOne = async function (req, res) {
   }
 };
 
+const staffDeleteOne = async function (req, res) {
+  const staffid = req.params.staffid;
+  if (!staffid) {
+    return res.status(404).json({ message: "No staffid" });
+  }
+  try {
+    const member = await Staff.findByIdAndDelete(staffid);
+
+    if (!member) {
+      return res.status(404).json({ message: "staffid not found" });
+    }
+
+    res.status(204).json(null);
+  } catch (err) {
+    res.status(404).json(err);
+  }
+};
+
 module.exports = {
   playersList,
   playersCreate,
   playersReadOne,
   playersUpdateOne,
+  playersDeleteOne,
   staffList,
   staffCreate,
   staffReadOne,
-  staffUpdateOne
+  staffUpdateOne,
+  staffDeleteOne
 };
