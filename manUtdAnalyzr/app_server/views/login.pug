@@ -11,8 +11,9 @@ block content
           small.text-body-secondary= pageHeader.kicker
           h1.h4.mt-1.mb-4= pageHeader.title
           form(action=form.action, method=form.method)
-            each field in form.fields
-              +formField(field)
+            .row.g-3.mb-3
+              each field in form.fields
+                +formField(field)
             button.btn.btn-united.w-100.mt-2(type='submit')= form.submitLabel
           p.small.mt-3.mb-0
             | #{registerLink.text} 

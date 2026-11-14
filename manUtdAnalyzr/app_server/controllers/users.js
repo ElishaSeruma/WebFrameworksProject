@@ -25,10 +25,10 @@ const register = function (req, res) {
       method: 'post',
       submitLabel: 'Continue',
       fields: [
-        { name: 'firstName',       label: 'First name',       type: 'text',     placeholder: 'First name' },
-        { name: 'lastName',        label: 'Last name',        type: 'text',     placeholder: 'Last name' },
-        { name: 'age',             label: 'Age',              type: 'number',   placeholder: 'Age' },
-        { name: 'favouritePlayer', label: 'Favourite player', type: 'select',   placeholder: 'Select a player', options: squad.map(p => p.name) },
+        { name: 'firstName',       label: 'First name',       type: 'text',     placeholder: 'First name', col: 'col-12 col-sm-6' },
+        { name: 'lastName',        label: 'Last name',        type: 'text',     placeholder: 'Last name', col: 'col-12 col-sm-6' },
+        { name: 'age',             label: 'Age',              type: 'number',   placeholder: 'Age', col: 'col-12 col-sm-6' },
+        { name: 'favouritePlayer', label: 'Favourite player', type: 'select',   placeholder: 'Select a player', options: squad.map(p => p.name), col: 'col-12 col-sm-6' },
         { name: 'username',        label: 'Username',         type: 'text',     placeholder: 'Username' },
         { name: 'password',        label: 'Password',         type: 'password', placeholder: 'Password' }
       ]

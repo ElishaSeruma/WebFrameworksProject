@@ -1,6 +1,6 @@
 //- Form field
 mixin formField(field)
-  .mb-3.text-start
+  .text-start(class=field.col || 'col-12')
     label.form-label(for=field.name)= field.label
     if field.type === 'select'
       select.form-select(id=field.name, name=field.name)
