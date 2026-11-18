@@ -1,5 +1,4 @@
 const axios = require('axios');
-const squad = require('../data/squad');
 
 const apiOptions = {
   server : 'http://localhost:3009'
@@ -9,7 +8,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // Register page
-const register = function (req, res) {
+const _renderRegister = function (req, res, players) {
   res.render('register', {
     title: 'Register | Stats Analyzr',
     pageHeader: {
@@ -28,7 +27,7 @@ const register = function (req, res) {
         { name: 'firstName',       label: 'First name',       type: 'text',     placeholder: 'First name', col: 'col-12 col-sm-6' },
         { name: 'lastName',        label: 'Last name',        type: 'text',     placeholder: 'Last name', col: 'col-12 col-sm-6' },
         { name: 'age',             label: 'Age',              type: 'number',   placeholder: 'Age', col: 'col-12 col-sm-6' },
-        { name: 'favouritePlayer', label: 'Favourite player', type: 'select',   placeholder: 'Select a player', options: squad.map(p => p.name), col: 'col-12 col-sm-6' },
+        { name: 'favouritePlayer', label: 'Favourite player', type: 'select',   placeholder: 'Select a player', options: players.map(p => p.name), col: 'col-12 col-sm-6' },
         { name: 'username',        label: 'Username',         type: 'text',     placeholder: 'Username' },
         { name: 'password',        label: 'Password',         type: 'password', placeholder: 'Password' }
       ]
@@ -38,6 +37,24 @@ const register = function (req, res) {
       value: 'username'
     }
   });
+};
+
+/* GET 'register' page */
+const register = async function (req, res) {
+  let players = [];
+
+  try {
+    const response = await axios.get(apiOptions.server + '/api/players');
+    if (response.status === 200 && Array.isArray(response.data)) {
+      players = response.data;
+    } else {
+      console.log('API error or non-array body:', response.data);
+    }
+  } catch (err) {
+    console.log('Request failed:', err.message);
+  }
+
+  _renderRegister(req, res, players);
 };
 
 // Login page
