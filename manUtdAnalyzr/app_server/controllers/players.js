@@ -77,6 +77,62 @@ const squadStats = async function (req, res) {
   _renderSquadStats(req, res, players, staff);
 };
 
+// Player detail page
+const _renderPlayerDetail = function (req, res, player) {
+  const stats = player.stats || {};
+  res.render('player-detail', {
+    title: player.name + ' | Stats Analyzr',
+    pageHeader: {
+      title: player.name,
+      strapline: '#' + player.number + ' ' + player.position
+    },
+    backLink: {
+      text: 'Back to full squad',
+      href: '/stats'
+    },
+    player: player,
+    details: [
+      { label: 'Age',      value: player.age },
+      { label: 'Country',  value: player.flag ? player.flag.name : '' },
+      { label: 'Position', value: player.position },
+      { label: 'Number',   value: player.number }
+    ],
+    stats: [
+      { label: 'Goals',          value: stats.goals },
+      { label: 'Assists',        value: stats.assists },
+      { label: 'Yellow Cards',   value: stats.yellowCards, icon: 'yellow' },
+      { label: 'Red Cards',      value: stats.redCards, icon: 'red' },
+      { label: 'Minutes Played', value: stats.minutesPlayed }
+    ]
+  });
+};
+
+/* GET 'player detail' page */
+const playerInfo = async function (req, res) {
+  const url = apiOptions.server + '/api/players/' + req.params.playerid;
+
+  try {
+    const response = await axios.get(url);
+
+    if (response.status === 200) {
+      _renderPlayerDetail(req, res, response.data);
+    } else {
+      res.status(response.status).render('error', {
+        message: 'Player not found',
+        error: response.data
+      });
+    }
+  } catch (err) {
+    const status = err.response ? err.response.status : 500;
+    const errorBody = err.response ? err.response.data : { message: err.message };
+    res.status(status).render('error', {
+      message: 'Player not found',
+      error: errorBody
+    });
+  }
+};
+
 module.exports = {
-  squadStats
+  squadStats,
+  playerInfo
 };

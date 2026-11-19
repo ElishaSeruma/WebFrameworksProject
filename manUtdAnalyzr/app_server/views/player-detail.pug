@@ -1,0 +1,39 @@
+extends layout
+
+block content
+  .row.banner.mb-4
+    .col-12
+      a.small(href=backLink.href) &larr; #{backLink.text}
+      h1.h2.mt-2.mb-1= pageHeader.title
+      p.text-body-secondary.mb-0= pageHeader.strapline
+
+  .row.g-4
+    .col-12.col-md-4
+      .card.h-100
+        img.card-img-top(src=player.photo, alt=player.name)
+        if player.flag
+          .card-body
+            .d-flex.align-items-center.gap-2
+              img.player-flag(src=player.flag.src, alt='', width='30', height='21')
+              span= player.flag.name
+
+    .col-12.col-md-8
+      .card.mb-4
+        .card-body
+          h2.h5.card-title Player details
+          .row.g-3
+            each item in details
+              .col-6.col-lg-3
+                small.text-body-secondary.d-block= item.label
+                span.fw-semibold= item.value
+
+      .card
+        .card-body
+          h2.h5.card-title Season stats
+          .row.g-3.text-center
+            each stat in stats
+              .col-6.col-sm-4.col-lg
+                if stat.icon
+                  span.card-icon(class='card-' + stat.icon, aria-hidden='true')
+                .fs-3.fw-bold= stat.value
+                small.text-body-secondary= stat.label
