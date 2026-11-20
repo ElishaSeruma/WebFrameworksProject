@@ -36,7 +36,7 @@ mixin squadTable(players, columns)
               .d-flex.align-items-center.gap-2
                 img.player-photo.rounded-circle(src=player.photo, alt='', width='40', height='40', loading='lazy')
                 div
-                  .fw-semibold.text-nowrap= player.name
+                  a.fw-semibold.text-nowrap(href='/stats/' + player._id)= player.name
                   small.text-body-secondary= player.position
             td= player.age
             td
