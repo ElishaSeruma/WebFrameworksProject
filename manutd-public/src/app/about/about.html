@@ -1,0 +1,91 @@
+<div class="row banner mb-4">
+  <div class="col-12">
+    <h1 class="h2 mb-1">{{ title() }}</h1>
+    <p class="text-body-secondary mb-0">{{ strapline() }}</p>
+  </div>
+</div>
+
+<div class="row mb-4">
+  <div class="col-12 col-lg-8">
+    <p class="lead">{{ intro }}</p>
+  </div>
+</div>
+
+<div class="row g-4 mb-5">
+  @for (feature of features; track feature.title) {
+    <div class="col-12 col-md-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h2 class="h5 card-title">{{ feature.title }}</h2>
+          <p class="card-text text-body-secondary">{{ feature.text }}</p>
+        </div>
+      </div>
+    </div>
+  }
+</div>
+
+<div class="row mb-3">
+  <div class="col-12">
+    <h2 class="h3 mb-1">Highlighted Players</h2>
+    <p class="text-body-secondary mb-0">Three players to watch this season</p>
+  </div>
+</div>
+
+<div class="row g-4 mb-5">
+  @for (player of highlightedPlayers; track player._id) {
+    <div class="col-12 col-sm-6 col-lg-4">
+      <div class="card staff-card h-100">
+        <img class="card-img-top staff-photo" src="{{ player.photo }}" alt="{{ player.name }}">
+        <div class="card-body">
+          <h5 class="card-title mb-1">
+            <a href="/stats/{{ player._id }}">{{ player.name }}</a>
+          </h5>
+          <p class="card-text text-body-secondary mb-3">#{{ player.number }} {{ player.position }}</p>
+          <div class="row text-center g-2 mb-3">
+            <div class="col-4">
+              <div class="fs-5 fw-bold">{{ player.stats.goals }}</div>
+              <small class="text-body-secondary">Goals</small>
+            </div>
+            <div class="col-4">
+              <div class="fs-5 fw-bold">{{ player.stats.assists }}</div>
+              <small class="text-body-secondary">Assists</small>
+            </div>
+            <div class="col-4">
+              <div class="fs-5 fw-bold">{{ player.stats.minutesPlayed }}</div>
+              <small class="text-body-secondary">Minutes</small>
+            </div>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <img class="player-flag" src="{{ player.flag.src }}" alt="" width="30" height="21">
+            <small>{{ player.flag.name }}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>
+
+<div class="row mb-3">
+  <div class="col-12">
+    <h2 class="h3 mb-1">Coaching Staff</h2>
+    <p class="text-body-secondary mb-0">The team behind the team</p>
+  </div>
+</div>
+
+<div class="row g-4">
+  @for (member of staff; track member._id) {
+    <div class="col-12 col-sm-6 col-lg-4">
+      <div class="card staff-card h-100">
+        <img class="card-img-top staff-photo" src="{{ member.photo }}" alt="{{ member.name }}">
+        <div class="card-body">
+          <h5 class="card-title mb-1">{{ member.name }}</h5>
+          <p class="card-text text-body-secondary mb-3">{{ member.role }}</p>
+          <div class="d-flex align-items-center gap-2">
+            <img class="player-flag" src="{{ member.flag.src }}" alt="" width="30" height="21">
+            <small>{{ member.flag.name }}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>
