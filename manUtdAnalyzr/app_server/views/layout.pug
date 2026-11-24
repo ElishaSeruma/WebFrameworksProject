@@ -4,10 +4,12 @@ html(lang='en', data-bs-theme='dark')
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     title= title
+    base(href='/')
     link(rel='icon', type='image/svg+xml', href='/images/logo.svg')
     link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/font-awesome.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/build/browser/styles-5INURTSO.css')
   body
   
     nav.navbar.navbar-expand-md.navbar-inverse
@@ -28,8 +30,11 @@ html(lang='en', data-bs-theme='dark')
               a.nav-link(href='/login') Login
             li.nav-item
               a.nav-link(href='/stats') View Stats
+            li.nav-item
+              a.nav-link(href='/about') About
 
     main.container.py-4
       block content
 
     script(src='/javascripts/bootstrap.bundle.min.js')
+    block scripts

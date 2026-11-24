@@ -1,7 +1,7 @@
-// Stats detail page
-const statDetail = function(req, res){
-res.render('index', { title: 'Stats Detail' });
+// About page (the content is rendered by the Angular app-about component)
+const about = function(req, res){
+  res.render('about', { title: 'About | Stats Analyzr' });
 };
 module.exports = {
-statDetail
+  about
 };
